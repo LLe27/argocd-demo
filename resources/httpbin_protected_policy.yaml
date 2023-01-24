@@ -3,7 +3,7 @@ kind: SecurityPolicy
 metadata:
   name: httpbin
 spec:
-  name: Some other Security Policy
+  name: Httpbin Security Policy
   state: active
   active: true
   access_rights_array:
