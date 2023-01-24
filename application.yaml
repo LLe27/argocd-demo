@@ -1,3 +1,4 @@
+# Version control for tyk apis and policies
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
@@ -6,24 +7,34 @@ metadata:
 spec:
   project: default
   source:
-    repoURL: https://github.com/LLe27/argocd-demo.git
-    targetRevision: HEAD
+    repoURL: 'https://github.com/LLe27/argocd-demo.git'
     path: resources
+    targetRevision: HEAD
   destination:
-    server: https://kubernetes.default.svc
-    namespace: tyk
-  syncPolicy:
-    syncOptions:
-    - CreateNamespace=true
-    automated:
-      selfHeal: true
-      prune: true
+    server: 'https://kubernetes.default.svc'
+    namespace: default
+
+  # project: default
+  # source:
+  #   repoURL: https://github.com/LLe27/argocd-demo.git
+  #   targetRevision: HEAD
+  #   path: resources
+  # destination:
+  #   server: https://kubernetes.default.svc
+  #   namespace: tyk
+  # syncPolicy:
+  #   syncOptions:
+  #   - CreateNamespace=true
+  #   automated:
+  #     selfHeal: true
+  #     prune: true
 ---
+# Cert-manager application
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
   name: cert-manager
-  namespace: cert-manager
+  namespace: argocd
 spec:
   project: default
   source:
@@ -37,12 +48,17 @@ spec:
   destination:
     server: 'https://kubernetes.default.svc'
     namespace: cert-manager
+  syncPolicy:
+    automated:
+      selfHeal: true
+      prune: true
 ---
+# Tyk-Operator application
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
   name: tyk-operator
-  namespace: tyk-operator-system
+  namespace: argocd
 spec:
   project: default
   source:
@@ -52,3 +68,7 @@ spec:
   destination:
     server: 'https://kubernetes.default.svc'
     namespace: tyk-operator-system
+  syncPolicy:
+    automated:
+      selfHeal: true
+      prune: true
