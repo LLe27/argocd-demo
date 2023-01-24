@@ -14,14 +14,6 @@ spec:
     server: 'https://kubernetes.default.svc'
     namespace: default
 
-  # project: default
-  # source:
-  #   repoURL: https://github.com/LLe27/argocd-demo.git
-  #   targetRevision: HEAD
-  #   path: resources
-  # destination:
-  #   server: https://kubernetes.default.svc
-  #   namespace: tyk
   # syncPolicy:
   #   syncOptions:
   #   - CreateNamespace=true
